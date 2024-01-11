@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "564166718618",
+    "project_id": "flixflex-e83da",
+    "storage_bucket": "flixflex-e83da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564166718618:android:38df535557bfd869e19b23",
+        "android_client_info": {
+          "package_name": "com.hacine.mohamed.hakim.flixflex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDr_46_WWtyhfTAXUFMUbIteeID38AQsYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
