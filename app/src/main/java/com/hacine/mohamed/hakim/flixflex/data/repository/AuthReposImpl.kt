@@ -3,9 +3,14 @@ package com.hacine.mohamed.hakim.flixflex.data.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.hacine.mohamed.hakim.flixflex.presentation.SignUpScreen.Resource
-import com.hacine.mohamed.hakim.flixflex.presentation.SignUpScreen.await
+import com.hacine.mohamed.hakim.flixflex.utils.Resource
+import com.hacine.mohamed.hakim.flixflex.utils.await
+
 import javax.inject.Inject
+
+
+
+
 
 class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth

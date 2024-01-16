@@ -1,7 +1,7 @@
 package com.hacine.mohamed.hakim.flixflex.data.repository
 
 import com.google.firebase.auth.FirebaseUser
-import com.hacine.mohamed.hakim.flixflex.presentation.SignUpScreen.Resource
+import com.hacine.mohamed.hakim.flixflex.utils.Resource
 
 interface AuthRepository {
     val currentUser: FirebaseUser?

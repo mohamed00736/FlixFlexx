@@ -1,8 +1,17 @@
-package com.hacine.mohamed.hakim.flixflex.presentation.SignUpScreen
+package com.hacine.mohamed.hakim.flixflex.presentation.login
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
+import com.hacine.mohamed.hakim.flixflex.presentation.signup.AuthViewModel
+
 
 import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -10,94 +19,57 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.google.android.gms.tasks.Task
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resumeWithException
+import com.hacine.mohamed.hakim.flixflex.ui.components.LoadingView
+import com.hacine.mohamed.hakim.flixflex.ui.theme.CardColor
 
+import com.hacine.mohamed.hakim.flixflex.utils.Resource
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpScreen(
-    navController: NavController,
-    viewModel: AuthViewModel?
+fun LoginScreen(
+    viewModel: AuthViewModel?,
+    onNavigateToSignUp: () -> Unit,
+    onNavigateToMovies: () -> Unit,
 ) {
-
-    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
-    val signupFlow = viewModel?.signupFlow?.collectAsState()
-
+    val loginFlow = viewModel?.loginFlow?.collectAsState()
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
-                text = "Sign Up",
-                color = Color.White
+                text = "Log In", color = Color.Black
             )
-        },
-            navigationIcon = {
-                IconButton(onClick = {
-                    navController.navigate("login") {
-                        popUpTo("signup") { inclusive = true }
-                    }
-                }) {
-                    Icon(
-                        imageVector = Icons.Filled.ArrowBack,
-                        contentDescription = "Back",
-                        tint = Color.White
-                    )
-
-                }
-            })
+        }, modifier = Modifier.shadow(elevation = 16.dp),
+            colors = TopAppBarDefaults.topAppBarColors(containerColor = CardColor),)
     }) { padding ->
-
         LazyColumn(modifier = Modifier.padding(padding)) {
             item {
-                Column(modifier = Modifier.fillMaxSize()) {
-
-
-                    OutlinedTextField(
-                        value = name,
-                        onValueChange = {
-                            name = it
-                        },
-                        label = {
-                            Text(text = "enter name ")
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.None,
-                            autoCorrect = false,
-                            keyboardType = KeyboardType.Email,
-                            imeAction = ImeAction.Next
-                        )
-                    )
-
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp, vertical = 16.dp)) {
                     OutlinedTextField(
                         value = email,
                         onValueChange = {
                             email = it
                         },
                         label = {
-                            Text(text = "enter email")
+                            Text(text = "email")
                         },
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight(),
-
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.None,
                             autoCorrect = false,
@@ -105,20 +77,18 @@ fun SignUpScreen(
                             imeAction = ImeAction.Next
                         )
                     )
-
+                    Spacer(modifier = Modifier.height(8.dp))
                     OutlinedTextField(
                         value = password,
                         onValueChange = {
                             password = it
                         },
                         label = {
-                            Text(text = "enter password")
+                            Text(text = "Password")
                         },
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight(),
-
-                        visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.None,
                             autoCorrect = false,
@@ -126,99 +96,56 @@ fun SignUpScreen(
                             imeAction = ImeAction.Done
                         )
                     )
-
+                    Spacer(modifier = Modifier.height(8.dp))
                     Button(
                         onClick = {
-                            viewModel?.signup(name, email, password)
+                            viewModel?.login(email, password)
                         },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .wrapContentHeight(),
-
-                        ) {
+                            .wrapContentHeight()
+                    ) {
                         Text(
-                            text = "sign up",
+                            text = "LOGIN",
                             style = MaterialTheme.typography.titleMedium
                         )
                     }
-
-
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         modifier = Modifier
                             .padding(bottom = 30.dp)
                             .fillMaxWidth()
                             .wrapContentHeight()
                             .clickable {
-                                navController.navigate("login") {
-                                    popUpTo("signup") { inclusive = true }
-                                }
+                                onNavigateToSignUp()
                             },
-                        text = "already have account",
+                        text = "I dont have account",
                         style = MaterialTheme.typography.bodyLarge,
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onSurface
                     )
 
-                    signupFlow?.value?.let {
+                    loginFlow?.value?.let {
                         when (it) {
                             is Resource.Failure -> {
-                                val context = LocalContext.current
-                                Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG)
-                                    .show()
+                                LaunchedEffect(Unit) {
+                                    Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG)
+                                        .show()
+                                }
                             }
                             Resource.Loading -> {
-                                CircularProgressIndicator(modifier = Modifier.wrapContentSize())
+                                LoadingView()
                             }
                             is Resource.Success -> {
-
-                                Text(text = "SUCESS SignUp" )
-
+                                LaunchedEffect(Unit) {
+                                    onNavigateToMovies()
+                                }
                             }
                         }
                     }
-
                 }
             }
         }
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-sealed class Resource<out R> {
-    data class Success<out R>(val result: R) : Resource<R>()
-    data class Failure(val exception: Exception) : Resource<Nothing>()
-    object Loading : Resource<Nothing>()
-}
-
-@OptIn(ExperimentalCoroutinesApi::class)
-suspend fun <T> Task<T>.await(): T {
-    return suspendCancellableCoroutine { cont ->
-        addOnCompleteListener {
-            if (it.exception != null) {
-                cont.resumeWithException(it.exception!!)
-            } else {
-                cont.resume(it.result, null)
-            }
-        }
     }
 }
-
-
-
-
-
-
-
 

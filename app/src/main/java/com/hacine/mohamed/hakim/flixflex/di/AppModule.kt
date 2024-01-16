@@ -1,8 +1,9 @@
 package com.hacine.mohamed.hakim.flixflex.di
 
 import com.google.firebase.auth.FirebaseAuth
-import com.hacine.mohamed.hakim.flixflex.presentation.SignUpScreen.AuthRepository
-import com.hacine.mohamed.hakim.flixflex.presentation.SignUpScreen.AuthRepositoryImpl
+import com.hacine.mohamed.hakim.flixflex.data.repository.AuthRepository
+import com.hacine.mohamed.hakim.flixflex.data.repository.AuthRepositoryImpl
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

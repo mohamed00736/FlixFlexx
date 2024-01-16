@@ -89,8 +89,8 @@ dependencies {
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
 
     //Navigation ui
-    implementation ("androidx.navigation:navigation-compose:2.7.4")
-
+//    implementation ("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     //Coil
     implementation("io.coil-kt:coil-compose:2.0.0")
 
@@ -104,8 +104,15 @@ dependencies {
 
 
 
+
+    implementation ("androidx.paging:paging-runtime:3.2.1")
+    // optional - Jetpack Compose integration
+    implementation("androidx.paging:paging-compose:3.2.1")
+
     // Lottie
     implementation ("com.airbnb.android:lottie-compose:5.0.3")
     implementation ("com.airbnb.android:lottie:5.0.3")
     implementation ("androidx.compose.material:material-icons-extended-android:1.5.0-beta02")
-}
+
+    //
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")}
