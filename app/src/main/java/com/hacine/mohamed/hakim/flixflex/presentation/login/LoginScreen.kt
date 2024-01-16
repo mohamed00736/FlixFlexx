@@ -7,7 +7,6 @@ import com.hacine.mohamed.hakim.flixflex.presentation.signup.AuthViewModel
 
 
 import android.widget.Toast
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,13 +14,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -29,12 +25,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import com.hacine.mohamed.hakim.flixflex.data.network.AuthUiState
 import com.hacine.mohamed.hakim.flixflex.ui.components.LoadingView
 import com.hacine.mohamed.hakim.flixflex.ui.theme.CardColor
 import com.hacine.mohamed.hakim.flixflex.ui.theme.TextColor
 
-import com.hacine.mohamed.hakim.flixflex.utils.Resource
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -132,16 +127,16 @@ fun LoginScreen(
 
                     loginFlow?.value?.let {
                         when (it) {
-                            is Resource.Failure -> {
+                            is AuthUiState.Failure -> {
                                 LaunchedEffect(Unit) {
                                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG)
                                         .show()
                                 }
                             }
-                            Resource.Loading -> {
+                            AuthUiState.Loading -> {
                                 LoadingView()
                             }
-                            is Resource.Success -> {
+                            is AuthUiState.Success -> {
                                 LaunchedEffect(Unit) {
                                     onNavigateToMovies()
                                 }

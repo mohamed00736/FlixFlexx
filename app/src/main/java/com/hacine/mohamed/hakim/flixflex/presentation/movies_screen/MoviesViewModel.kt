@@ -20,9 +20,6 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(private val moviesRepository: MoviesRepository) :
     ViewModel() {
 
-    private val _movieListuiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
-    val movieListuiState: StateFlow<UiState> get() = _movieListuiState
-
     private val _trendingMovieListuiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
     val trendingMovieListuiState: StateFlow<UiState> get() = _trendingMovieListuiState
 

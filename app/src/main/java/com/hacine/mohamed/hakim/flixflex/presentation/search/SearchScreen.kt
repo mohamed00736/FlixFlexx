@@ -41,8 +41,7 @@ import com.hacine.mohamed.hakim.flixflex.data.models.Film
 import com.hacine.mohamed.hakim.flixflex.ui.components.SearchBar
 import com.hacine.mohamed.hakim.flixflex.ui.components.SearchResultItem
 import com.hacine.mohamed.hakim.flixflex.ui.theme.AppOnPrimaryColor
-import com.hacine.mohamed.hakim.flixflex.ui.theme.AppPrimaryColor
-import com.hacine.mohamed.hakim.flixflex.ui.theme.AppPrimaryColor2
+
 import com.hacine.mohamed.hakim.flixflex.ui.theme.CardColor
 
 

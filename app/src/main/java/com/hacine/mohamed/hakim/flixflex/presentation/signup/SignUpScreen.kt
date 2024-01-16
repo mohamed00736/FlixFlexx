@@ -7,14 +7,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -22,16 +20,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import com.google.android.gms.tasks.Task
+import com.hacine.mohamed.hakim.flixflex.data.network.AuthUiState
 import com.hacine.mohamed.hakim.flixflex.ui.components.LoadingView
 import com.hacine.mohamed.hakim.flixflex.ui.theme.CardColor
 import com.hacine.mohamed.hakim.flixflex.ui.theme.TextColor
-import com.hacine.mohamed.hakim.flixflex.utils.Resource
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resumeWithException
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -165,7 +157,7 @@ fun SignUpScreen(
 
                     signupFlow?.value?.let { it ->
                         when (it) {
-                            is Resource.Failure -> {
+                            is AuthUiState.Failure -> {
                                 LaunchedEffect(true ){
                                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG)
                                         .show()
@@ -173,13 +165,13 @@ fun SignUpScreen(
 
                             }
 
-                            Resource.Loading -> {
+                            AuthUiState.Loading -> {
 
                                 LoadingView()
 
                             }
 
-                            is Resource.Success -> {
+                            is AuthUiState.Success -> {
 
                                 LaunchedEffect(true ){
                                     Log.d(

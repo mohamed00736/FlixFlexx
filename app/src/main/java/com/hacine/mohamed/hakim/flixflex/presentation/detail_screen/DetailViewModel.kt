@@ -20,8 +20,6 @@ class DetailViewModel @Inject constructor(private val moviesRepository: MoviesRe
     private val _movieDetailuiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
     val movieDetailuiState: StateFlow<UiState> get() = _movieDetailuiState
 
-    private val _serieDetailuiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
-    val serieDetailuiState: StateFlow<UiState> get() = _serieDetailuiState
 
     fun getMovieById(movieid: String) {
         viewModelScope.launch {

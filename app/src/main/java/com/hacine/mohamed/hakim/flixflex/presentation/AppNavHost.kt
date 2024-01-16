@@ -2,7 +2,6 @@ package com.hacine.mohamed.hakim.flixflex.presentation
 
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height

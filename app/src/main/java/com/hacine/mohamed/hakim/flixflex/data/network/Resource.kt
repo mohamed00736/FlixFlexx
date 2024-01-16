@@ -16,6 +16,11 @@ sealed class Resource<out T> {
         ) : Resource<Nothing>()
 }
 
+sealed class AuthUiState<out R> {
+    data class Success<out R>(val result: R) : AuthUiState<R>()
+    data class Failure(val exception: Exception) : AuthUiState<Nothing>()
+    object Loading : AuthUiState<Nothing>()
+}
 
 data class ErrorApiResponse(
     @SerializedName("status_code") val status_code: Int?,

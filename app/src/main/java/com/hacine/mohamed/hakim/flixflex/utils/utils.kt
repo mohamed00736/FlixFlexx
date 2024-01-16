@@ -5,11 +5,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resumeWithException
 
-sealed class Resource<out R> {
-    data class Success<out R>(val result: R) : Resource<R>()
-    data class Failure(val exception: Exception) : Resource<Nothing>()
-    object Loading : Resource<Nothing>()
-}
+
 
 @OptIn(ExperimentalCoroutinesApi::class)
 suspend fun <T> Task<T>.await(): T {
