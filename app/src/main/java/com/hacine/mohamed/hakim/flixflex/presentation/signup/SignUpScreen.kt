@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,6 +26,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.android.gms.tasks.Task
 import com.hacine.mohamed.hakim.flixflex.ui.components.LoadingView
+import com.hacine.mohamed.hakim.flixflex.ui.theme.CardColor
+import com.hacine.mohamed.hakim.flixflex.ui.theme.TextColor
 import com.hacine.mohamed.hakim.flixflex.utils.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -48,7 +51,7 @@ fun SignUpScreen(
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
-                text = "Sign Up", color = Color.Black
+                text = "Sign Up", color = TextColor
             )
         }, navigationIcon = {
             IconButton(onClick = {
@@ -56,14 +59,14 @@ fun SignUpScreen(
 
             }) {
                 Icon(
-                    imageVector = Icons.Filled.ArrowBack,
+                    imageVector = Icons.Outlined.ArrowBack,
                     contentDescription = "Back",
-                    tint = Color.Black
+                    tint = CardColor
                 )
 
             }
-        } , modifier = Modifier.shadow(elevation = 16.dp))
-    }) { padding ->
+        } , modifier = Modifier.shadow(elevation = 16.dp),colors = TopAppBarDefaults.topAppBarColors(containerColor = CardColor))
+    } , containerColor = CardColor) { padding ->
 
         LazyColumn(modifier = Modifier.fillMaxSize().padding(padding)) {
             item {

@@ -48,7 +48,7 @@ val BackgroundColor: Color
 
 val TextColor: Color
     @Composable
-    get() = if (!isSystemInDarkTheme()) blueText else Color.White
+    get() = if (!isSystemInDarkTheme()) Color.Black else Color.White
 
 val CardColor: Color
     @Composable

@@ -7,6 +7,7 @@ import com.hacine.mohamed.hakim.flixflex.presentation.signup.AuthViewModel
 
 
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.hacine.mohamed.hakim.flixflex.ui.components.LoadingView
 import com.hacine.mohamed.hakim.flixflex.ui.theme.CardColor
+import com.hacine.mohamed.hakim.flixflex.ui.theme.TextColor
 
 import com.hacine.mohamed.hakim.flixflex.utils.Resource
 
@@ -49,12 +51,12 @@ fun LoginScreen(
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(
-                text = "Log In", color = Color.Black
+                text = "Log In", color = TextColor
             )
         }, modifier = Modifier.shadow(elevation = 16.dp),
             colors = TopAppBarDefaults.topAppBarColors(containerColor = CardColor),)
-    }) { padding ->
-        LazyColumn(modifier = Modifier.padding(padding)) {
+    }, containerColor = (CardColor)) { padding ->
+        LazyColumn(modifier = Modifier.padding(padding) ) {
             item {
                 Column(modifier = Modifier
                     .fillMaxSize()

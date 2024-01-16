@@ -108,6 +108,9 @@ fun AppNavHost(
             }
 
             composable(moviesTab.title) {
+                BackHandler(enabled = true) {
+                    onFinish()
+                }
                 MainScreen(onMovieSelected = { movieid ->
                     navController.navigate("detail?movieid=${movieid}")
                 }, onSearchClick = {
