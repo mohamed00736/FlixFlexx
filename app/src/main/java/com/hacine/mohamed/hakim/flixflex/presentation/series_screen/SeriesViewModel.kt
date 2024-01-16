@@ -25,8 +25,8 @@ class SeriesViewModel @Inject constructor(private val moviesRepository: MoviesRe
     private val _trendingSeriesListuiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
     val trendingSeriesListuiState: StateFlow<UiState> get() = _trendingSeriesListuiState
 
-    private var _seriesState: Flow<PagingData<Tv>>? = null
-    val seriesState: Flow<PagingData<Tv>>? get() = _seriesState
+    private var _pagedSeriesState: Flow<PagingData<Tv>>? = null
+    val pagedSeriesState: Flow<PagingData<Tv>>? get() = _pagedSeriesState
 
     init {
         getTrendingSeries()
@@ -35,7 +35,7 @@ class SeriesViewModel @Inject constructor(private val moviesRepository: MoviesRe
 
 
     private fun getSeriesPaged() {
-        _seriesState = moviesRepository.getSeriesPaged().cachedIn(viewModelScope)
+        _pagedSeriesState = moviesRepository.getSeriesPaged().cachedIn(viewModelScope)
     }
 
 

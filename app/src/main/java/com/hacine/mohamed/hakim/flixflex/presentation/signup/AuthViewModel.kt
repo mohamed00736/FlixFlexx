@@ -11,62 +11,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.Exception
 
 
-//@HiltViewModel
-//class AuthViewModel @Inject constructor(
-//    private val repository: AuthRepository
-//) : ViewModel() {
-//
-//    private val _loginFlow = MutableStateFlow<UiState<FirebaseUser>>(UiState.Idle)
-//    val loginFlow: StateFlow<UiState<FirebaseUser>> = _loginFlow
-//
-//    private val _signupFlow = MutableStateFlow<UiState<FirebaseUser>>(UiState.Idle)
-//    val signupFlow: StateFlow<UiState<FirebaseUser>> = _signupFlow.asStateFlow()
-//
-//    val currentUser: FirebaseUser?
-//        get() = repository.currentUser
-//
-//    init {
-//        if (repository.currentUser != null) {
-//            _loginFlow.value = UiState.Success(repository.currentUser)
-//        }
-//    }
-//
-//    fun login(email: String, password: String) = viewModelScope.launch {
-//        _loginFlow.value = UiState.Loading
-//        val result = repository.login(email, password)
-//        if (result is com.hacine.mohamed.hakim.flixflex.data.network.Resource.Success) {
-//            _loginFlow.value = UiState.Success(result.value)
-//        } else if (result is com.hacine.mohamed.hakim.flixflex.data.network.Resource.Failure) {
-//            _loginFlow.value = UiState.Error(result.message)
-//        }
-//    }
-//
-//    fun signup(name: String, email: String, password: String) = viewModelScope.launch {
-//        _signupFlow.value = UiState.Loading
-//        val result = repository.signup(name, email, password)
-//        if (result is com.hacine.mohamed.hakim.flixflex.data.network.Resource.Success) {
-//            _signupFlow.value = UiState.Success(result.value)
-//        } else if (result is com.hacine.mohamed.hakim.flixflex.data.network.Resource.Failure) {
-//            _signupFlow.value = UiState.Fail(result.message)
-//        }
-//    }
-//
-//    fun logout() {
-//        repository.logout()
-//        _loginFlow.value = UiState.Idle
-//        _signupFlow.value = UiState.Idle
-//    }
-//}
-//
-//sealed class UiState<out T> {
-//    object Idle : UiState<Nothing>()
-//    object Loading : UiState<Nothing>()
-//    data class Success<T>(val data: T? = null) : UiState<T>()
-//    data class Error(val message: String? = null) : UiState<Nothing>()
-//    data class Fail(val message: String? = null) : UiState<Nothing>()
-//}
+
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(

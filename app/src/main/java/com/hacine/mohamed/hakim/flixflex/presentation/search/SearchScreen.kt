@@ -61,8 +61,6 @@ fun SearchScreen(
             .fillMaxSize()
             .background(CardColor)
     ) {
-
-        //TopAppBar
         TopAppBar(
             title = {
                 Text(
@@ -143,10 +141,9 @@ fun SearchScreen(
                                     .padding(top = 60.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-//                                Image(
-//                                    painter = painterResource(id = R.drawable.no_match_found),
-//                                    contentDescription = null
-//                                )
+                                Text(
+                                    text = "No Match Found"
+                                )
                             }
 
                         }
@@ -171,10 +168,9 @@ fun SearchScreen(
                             .padding(top = 60.dp),
                         contentAlignment = Alignment.Center
                     ) {
-//                        Image(
-//                            painter = painterResource(id = R.drawable.no_match_found),
-//                            contentDescription = null
-//                        )
+                        Text(
+                            text = "No Match Found"
+                        )
                     }
                 }
             }

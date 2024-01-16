@@ -39,7 +39,7 @@ class SearchViewModel @Inject constructor(
 
     var searchParam = mutableStateOf("")
     var previousSearch = mutableStateOf("")
-    var searchParamState: State<String> = searchParam
+
 
     init {
         searchParam.value = ""

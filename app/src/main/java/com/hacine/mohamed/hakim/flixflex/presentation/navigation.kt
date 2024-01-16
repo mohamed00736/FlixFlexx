@@ -76,7 +76,7 @@ fun AppNavHost(
         ) {
 
             composable(
-                "detail?movieid={movieid}&seriesid={seriesid}",
+                "${MainDestinations.Detail}?movieid={movieid}&seriesid={seriesid}",
                 arguments = listOf(navArgument(name = "movieid") {
                     type = NavType.StringType
                     nullable = true
@@ -89,14 +89,14 @@ fun AppNavHost(
 
                     if (movieId != null) {
                         MovieDetailScreen(movieid = movieId , onPlay = {
-                            navController.navigate("videoplayer?movieid=${movieId}")
+                            navController.navigate("${MainDestinations.VideoPlayer}?movieid=${movieId}")
                         }) {
                             navController.navigateUp()
                         }
                     } else {
                         from.arguments?.getString("seriesid").let { serieid ->
                             MovieDetailScreen(seriesid = serieid, onPlay = {
-                                navController.navigate("videoplayer?seriesid=${serieid}")
+                                navController.navigate("${MainDestinations.VideoPlayer}?seriesid=${serieid}")
 
                             }) {
                                 navController.navigateUp()
@@ -107,35 +107,35 @@ fun AppNavHost(
                 }
             }
 
-            composable(moviesTab.title) {
+            composable(MainDestinations.Movies) {
                 BackHandler(enabled = true) {
                     onFinish()
                 }
                 MainScreen(onMovieSelected = { movieid ->
-                    navController.navigate("detail?movieid=${movieid}")
+                    navController.navigate("${MainDestinations.Detail}?movieid=${movieid}")
                 }, onSearchClick = {
-                    navController.navigate("search")
+                    navController.navigate(MainDestinations.Search)
                 })
             }
 
-            composable(seriesTab.title) {
+            composable(MainDestinations.Series) {
 
                 SeriesScreen (onSearchClick = {
-                    navController.navigate("search")
+                    navController.navigate(MainDestinations.Search)
                 }){ seriesid ->
-                    navController.navigate("detail?seriesid=${seriesid}")
+                    navController.navigate("${MainDestinations.Detail}?seriesid=${seriesid}")
                 }
             }
-            composable("signup") {
+            composable(MainDestinations.SignUp) {
 
                 SignUpScreen( viewModel) {
-                    navController.navigate("login") {
+                    navController.navigate(MainDestinations.Login) {
                         launchSingleTop = true
                     }
                 }
 
             }
-            composable("videoplayer?movieid={movieid}&seriesid={seriesid}",
+            composable("${MainDestinations.VideoPlayer}?movieid={movieid}&seriesid={seriesid}",
                 arguments = listOf(navArgument(name = "movieid") {
                     type = NavType.StringType
                     nullable = true
@@ -158,31 +158,31 @@ fun AppNavHost(
                 }
             }
 
-            composable("search") {
+            composable(MainDestinations.Search) {
 
                 SearchScreen(navigator = navController, onSelected = {
                     if (it.mediaType == "tv") {
-                        navController.navigate("detail?seriesid=${it.id}")
+                        navController.navigate("${MainDestinations.Detail}?seriesid=${it.id}")
                     } else {
-                        navController.navigate("detail?movieid=${it.id}")
+                        navController.navigate("${MainDestinations.Detail}?movieid=${it.id}")
                     }
 
                 })
 
             }
 
-            composable("login") {
+            composable(MainDestinations.Login) {
                 BackHandler(enabled = true) {
                     onFinish()
                 }
                 LoginScreen(viewModel ,
                     onNavigateToMovies = {
-                        navController.navigate("movies") {
+                        navController.navigate(MainDestinations.Movies) {
                             launchSingleTop = true
                         }
                     },
                     onNavigateToSignUp = {
-                        navController.navigate("signup") {
+                        navController.navigate(MainDestinations.SignUp) {
                             launchSingleTop = true
 
                         }

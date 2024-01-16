@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -81,6 +82,7 @@ fun LoginScreen(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     OutlinedTextField(
+
                         value = password,
                         onValueChange = {
                             password = it
@@ -91,6 +93,7 @@ fun LoginScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight(),
+                        visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.None,
                             autoCorrect = false,
@@ -130,6 +133,7 @@ fun LoginScreen(
                     loginFlow?.value?.let {
                         when (it) {
                             is Resource.Failure -> {
+                              val o =   it.exception
                                 LaunchedEffect(Unit) {
                                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG)
                                         .show()
