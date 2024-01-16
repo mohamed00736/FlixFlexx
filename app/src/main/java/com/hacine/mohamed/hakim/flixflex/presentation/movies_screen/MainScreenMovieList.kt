@@ -57,7 +57,6 @@ fun MainScreen(
 
 ) {
 
-    val movieListState = viewModel.movieListuiState.collectAsState()
     val trendingMovieListState = viewModel.trendingMovieListuiState.collectAsState()
 
     val lifecycleOwner = LocalLifecycleOwner.current

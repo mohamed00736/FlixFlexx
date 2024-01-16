@@ -133,7 +133,6 @@ fun LoginScreen(
                     loginFlow?.value?.let {
                         when (it) {
                             is Resource.Failure -> {
-                              val o =   it.exception
                                 LaunchedEffect(Unit) {
                                     Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG)
                                         .show()
