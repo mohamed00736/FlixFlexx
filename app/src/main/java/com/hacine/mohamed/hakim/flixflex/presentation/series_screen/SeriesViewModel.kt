@@ -20,8 +20,7 @@ import javax.inject.Inject
 class SeriesViewModel @Inject constructor(private val moviesRepository: MoviesRepository) :
     ViewModel() {
 
-    private val _movieListuiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
-    val movieListuiState: StateFlow<UiState> get() = _movieListuiState
+
 
     private val _trendingSeriesListuiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Idle)
     val trendingSeriesListuiState: StateFlow<UiState> get() = _trendingSeriesListuiState
@@ -30,7 +29,6 @@ class SeriesViewModel @Inject constructor(private val moviesRepository: MoviesRe
     val seriesState: Flow<PagingData<Tv>>? get() = _seriesState
 
     init {
-       // getDiscoverSeries()
         getTrendingSeries()
         getSeriesPaged()
     }
@@ -48,6 +46,7 @@ class SeriesViewModel @Inject constructor(private val moviesRepository: MoviesRe
             _trendingSeriesListuiState.value = UiState.Loading
             when (val response = moviesRepository.getTrendingSeries()) {
                 is Resource.Success -> {
+
                     _trendingSeriesListuiState.value = UiState.Success(data = response.value)
                 }
 

@@ -2,6 +2,7 @@ package com.hacine.mohamed.hakim.flixflex.presentation.detail_screen
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -37,10 +38,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.SubcomposeAsyncImage
+import com.hacine.mohamed.hakim.flixflex.R
 import com.hacine.mohamed.hakim.flixflex.presentation.UiState
 
 import com.hacine.mohamed.hakim.flixflex.ui.components.FailedView
@@ -67,7 +70,6 @@ fun MovieDetailScreen(
             viewModel.getMovieById(movieid)
         }
         else{
-
             if (seriesid != null) {
                 viewModel.getSeriesById(seriesid)
             }
@@ -271,11 +273,10 @@ private fun DetailHeader(movie: Movie? = null , serie: Tv? = null, onPlay: () ->
                 ThreeDotLoading()
             },
             error = {
-
-//                Image(
-//                    painter = painterResource(id = R.drawable.baseline_error_outline_24),
-//                    contentDescription = ""
-//                )
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_error_outline_24),
+                    contentDescription = ""
+                )
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -297,10 +298,10 @@ private fun DetailHeader(movie: Movie? = null , serie: Tv? = null, onPlay: () ->
                 ThreeDotLoading()
             },
             error = {
-//                Image(
-//                    painter = painterResource(id = R.drawable.baseline_error_outline_24),
-//                    contentDescription = ""
-//                )
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_error_outline_24),
+                    contentDescription = ""
+                )
             },
             modifier = Modifier
                 .size(100.dp)

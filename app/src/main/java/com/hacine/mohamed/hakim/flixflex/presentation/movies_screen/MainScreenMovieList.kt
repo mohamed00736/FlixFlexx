@@ -1,12 +1,15 @@
 package com.hacine.mohamed.hakim.flixflex.presentation.movies_screen
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -19,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
@@ -27,6 +31,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -42,7 +48,7 @@ import com.hacine.mohamed.hakim.flixflex.ui.components.TrendingMovieListItem
 import com.hacine.mohamed.hakim.flixflex.ui.theme.CardColor
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun MainScreen(
     viewModel: MoviesViewModel = hiltViewModel(),
@@ -94,6 +100,11 @@ fun MainScreen(
         )) {
 
                 item {
+                    Row(modifier = Modifier.padding(8.dp)){
+                        Text(text = "Top 5 trending Movies 🔥" ,
+                            fontSize = 30.sp ,
+                            fontWeight = FontWeight.ExtraBold ,)
+                    }
                     when(trendingMovieListState.value){
                         is UiState.Loading -> {
                             ThreeDotLoading()
@@ -104,7 +115,7 @@ fun MainScreen(
                                 LazyRow(
                                     contentPadding = PaddingValues(vertical = 0.dp)
                                 ) {
-                                    items(movieList.results) { movie ->
+                                    items(movieList.results.take(5)) { movie ->
 
                                         TrendingMovieListItem(movie = movie) {
 
@@ -129,7 +140,14 @@ fun MainScreen(
                         else -> Unit
                     }
                 }
-
+            stickyHeader {
+                Row(modifier = Modifier.background(shape = RoundedCornerShape(bottomStart = 16.dp , bottomEnd = 16.dp),
+                    color =  CardColor).fillMaxWidth().height(50.dp)){
+                    Text(text = "Discover More" ,
+                        fontSize = 30.sp ,
+                        fontWeight = FontWeight.ExtraBold , modifier = Modifier.padding(horizontal = 16.dp))
+                }
+            }
             moviesStatePaged?.let { it ->
                 items(count = it.itemCount) { index ->
                     Box(modifier = Modifier.fillMaxWidth()) {
