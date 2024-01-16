@@ -11,7 +11,7 @@ Retrofit for network requests, and Coil for efficient image loading.
 - Gradle 8.2
 - Kotlin version : 1.9.0
 - Dagger Hilt 2.48
-- Jetpack Compose 1.5.1
+- Jetpack Compose 1.5.1 (to craete  UI)
 - Retrofit 2.9.0
 - Firebase ( for authentication; )
 
